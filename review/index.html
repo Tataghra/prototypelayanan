@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Review Layanan</title>
+</head>
+<body>
+  <h2>Form Review</h2>
+  <form id="ratingForm">
+    <label for="rating">Rating (1-5):</label><br>
+    <input type="number" id="rating" name="rating" min="1" max="5" required><br><br>
+
+    <label for="comment">Komentar:</label><br>
+    <textarea id="comment" name="comment" required></textarea><br><br>
+
+    <button type="submit">Kirim</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("ratingForm");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const rating = parseInt(document.getElementById("rating").value);
+      const comment = document.getElementById("comment").value;
+      const date = new Date().toISOString().split('T')[0];
+
+      const data = [];
+
+      for (let i = 0; i < rating; i++) {
+        data.push({
+          rating: rating,
+          comment: comment,
+          date: date
+        });
+      }
+
+      fetch("https://script.google.com/macros/s/AKfycbyWaafz_Jvf3Ot-FcmRWmN4wsBHTE7VzC3fV1hvYLhjFBh4CNlpfo3TiJJIW8USqDn3Qw/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => response.text())
+      .then(msg => {
+        alert("Berhasil dikirim!");
+        form.reset();
+      })
+      .catch(error => {
+        alert("Gagal mengirim data.");
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>
