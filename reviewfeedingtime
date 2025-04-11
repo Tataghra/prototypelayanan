@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Review Pengguna - RS JIH Purwokerto</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    #starRating span {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    #starRating span.active {
+      color: gold;
+    }
+  </style>
+</head>
+
+<body class="starter-page-page">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="#" class="logo d-flex align-items-center">
+        <h1 class="sitename">Tata Grha RS "JIH" Purwokerto</h1>
+      </a>
+      <nav id="" class="">
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======= Main ======= -->
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade">
+      <div class="heading text-center pt-5">
+        <h2 class="text-white">Silakan Masukan Review Anda</h2>
+      </div>
+    </div>
+
+    <!-- Review Section -->
+    <section id="review-section" class="starter-section section">
+      <div class="container" data-aos="fade-up">
+        <form id="reviewForm" class="mt-4">
+
+          <!-- Bintang Rating -->
+          <div class="mb-3">
+            <label class="form-label d-block mb-2">Beri Rating Anda:</label>
+            <div id="starRating">
+              <span data-value="1">&#9733;</span>
+              <span data-value="2">&#9733;</span>
+              <span data-value="3">&#9733;</span>
+              <span data-value="4">&#9733;</span>
+              <span data-value="5">&#9733;</span>
+            </div>
+            <input type="hidden" id="rating" name="rating" required>
+          </div>
+
+          <!-- Komentar -->
+          <div class="mb-3">
+            <label for="comment" class="form-label">Komentar</label>
+            <textarea id="comment" name="comment" class="form-control" rows="3" placeholder="Tulis komentar Anda di sini..." required></textarea>
+          </div>
+
+          <!-- Tombol Kirim -->
+          <button type="submit" class="btn btn-warning text-white">Kirim Review</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer dark-background">
+    <div class="container text-center mt-4">
+      <p><strong class="sitename">Tata Grha</strong> - Rumah Sakit JIH Purwokerto</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Script: Rating Bintang & Kirim Data -->
+  <script>
+    // Interaksi Bintang
+    const stars = document.querySelectorAll('#starRating span');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const ratingValue = star.getAttribute('data-value');
+        ratingInput.value = ratingValue;
+
+        stars.forEach(s => {
+          s.classList.toggle('active', s.getAttribute('data-value') <= ratingValue);
+        });
+      });
+    });
+
+    // Kirim ke Google Apps Script
+    document.getElementById('reviewForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const rating = ratingInput.value;
+      const comment = document.getElementById('comment').value;
+      const date = new Date().toISOString();
+
+      if (!rating) {
+        alert("Silakan pilih rating bintang terlebih dahulu.");
+        return;
+      }
+
+      fetch('https://script.google.com/macros/s/AKfycbxiOAA6MCUnjJ2XQmeDBBMpsX1TX4KWNl_5Mv7JnURZ88eRytaRPZ6QxneV8_2jEBF-sw/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rating, comment, date })
+      });
+
+      alert("Review berhasil dikirim. Terima kasih!");
+      document.getElementById('reviewForm').reset();
+      stars.forEach(s => s.classList.remove('active'));
+    });
+  </script>
+
+</body>
+
+</html>
