@@ -1740,6 +1740,31 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
 
+/* ===== SUBMENU FEATURES ===== */
+.features-item .faq-content {
+  display: none !important;
+  margin-top: 10px;
+}
+
+.features-item.active .faq-content {
+  display: block !important;
+}
+
+/* cursor klik */
+.features-item h3 {
+  cursor: pointer;
+}
+
+/* animasi panah */
+.faq-toggle {
+  transition: transform 0.3s;
+}
+
+.features-item.active .faq-toggle {
+  transform: rotate(180deg);
+}
+
+
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
