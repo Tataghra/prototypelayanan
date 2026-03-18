@@ -1741,28 +1741,40 @@ section,
 }
 
 /* ===== SUBMENU FEATURES ===== */
-.features-item .faq-content {
-  display: none !important;
+/* FIX submenu agar benar-benar tersembunyi */
+.features-item.faq-item .faq-content {
+  display: none;
+  width: 100%;
   margin-top: 10px;
 }
 
-.features-item.active .faq-content {
+/* saat aktif */
+.features-item.faq-item.active .faq-content {
+  display: block;
+}
+
+/* perbaiki layout agar turun ke bawah */
+.features-item.faq-item {
   display: block !important;
 }
 
-/* cursor klik */
-.features-item h3 {
+/* judul jadi clickable */
+.features-item.faq-item h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
 }
 
-/* animasi panah */
+/* panah */
 .faq-toggle {
-  transition: transform 0.3s;
+  transition: 0.3s;
 }
 
 .features-item.active .faq-toggle {
   transform: rotate(180deg);
 }
+
 
 
 /*--------------------------------------------------------------
