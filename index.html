@@ -254,16 +254,14 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-    <script>
-  document.querySelectorAll(".features-item.faq-item h3").forEach(item => {
-    item.addEventListener("click", function(e) {
-      e.preventDefault();
-      const parent = this.closest(".features-item");
+<script>
+  document.querySelectorAll(".faq-item h3").forEach(item => {
+    item.addEventListener("click", function() {
+      const parent = this.closest(".faq-item");
       parent.classList.toggle("active");
     });
   });
 </script>
-
 </body>
 
 </html>
