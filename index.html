@@ -223,12 +223,11 @@
   <script src="assets/js/main.js"></script>
 
 <script>
-  document.querySelectorAll(".faq-item h3").forEach(item => {
-    item.addEventListener("click", function() {
-      const parent = this.closest(".faq-item");
-      parent.classList.toggle("active");
-    });
+document.querySelectorAll(".faq-header").forEach(item => {
+  item.addEventListener("click", function() {
+    this.parentElement.classList.toggle("active");
   });
+});
 </script>
 </body>
 
