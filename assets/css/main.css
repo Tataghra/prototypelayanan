@@ -1783,3 +1783,41 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+/* Hidden Menu Feature */
+.faq-item {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.faq-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-content {
+  display: none;
+  margin-top: 15px;
+  padding-left: 5px;
+}
+
+.faq-item.active .faq-content {
+  display: block;
+}
+
+.submenu-btn {
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.3s;
+}
+
+.submenu-btn:hover {
+  background: #0d6efd;
+  color: white;
+}
